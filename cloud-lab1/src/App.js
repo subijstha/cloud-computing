@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import axios from "axios";
+import { useEffect, useState } from "react";
+export default function App() {
+  const [students, setstudents] = useState([]);
+  useEffect(() => {
+    async function fetchStudents() {
+      const studentsFromLambda = (
+        await axios.get(
+          "<your lambda URL>"
+        )
+      ).data;
+      setstudents(studentsFromLambda);
+      console.log(studentsFromLambda);
+    }
+    fetchStudents();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Cloud Computing course
+      <ol>
+        {students.map((student) => (
+          <li>{student}</li>
+        ))}
+      </ol>
     </div>
   );
 }
-
-export default App;
