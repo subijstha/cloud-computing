@@ -6,7 +6,7 @@ export default function App() {
     async function fetchStudents() {
       const studentsFromLambda = (
         await axios.get(
-          "<your lambda URL>"
+          "https://pfh52btqgmdxbiybdrjs7mvbai0nrgqz.lambda-url.us-east-1.on.aws/"
         )
       ).data;
       setstudents(studentsFromLambda);
@@ -19,7 +19,7 @@ export default function App() {
       Cloud Computing course
       <ol>
         {students.map((student) => (
-          <li>{student}</li>
+          <li><h4>{student}</h4></li>
         ))}
       </ol>
     </div>
